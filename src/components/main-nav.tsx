@@ -12,7 +12,12 @@ export function MainNav({
   const params = useParams();
   const routes = [
     {
-      href: `${params.storeId}/settings`,
+      href: `/${params.storeId}`,
+      label: "Overviews",
+      active: pathname === `/${params.storeId}`,
+    },
+    {
+      href: `/${params.storeId}/settings`,
       label: "Settings",
       active: pathname === `/${params.storeId}/settings`,
     },
@@ -24,7 +29,7 @@ export function MainNav({
           key={route.href}
           href={route.href}
           className={cn(
-            "text-sm font-medium transition-colors hover:text-primary",
+            "ml-4  lg:ml-6 text-sm font-medium transition-colors hover:text-primary",
             route.active
               ? "text-black dark:text-white"
               : "text-muted-foreground"
