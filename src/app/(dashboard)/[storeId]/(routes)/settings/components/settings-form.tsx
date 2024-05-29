@@ -41,85 +41,86 @@ const SettingsForm = ({ initialData }: SettingFormProps) => {
   const router = useRouter();
   const origin = useOrigin();
   const form = useForm<SettingsFormValues>({
-	resolver: zodResolver(formSchema),
-	defaultValues: initialData,
+    resolver: zodResolver(formSchema),
+    defaultValues: initialData,
   });
 
   const onSubmit = async (data: SettingsFormValues) => {
-	try {
-	  setLoading(true);
-	  await axios.patch(`/api/stores/${params.storeId}`, data);
-	  router.refresh();
-	  toast.success("Store updated.");
-	} catch (error) {
-	  toast.error("Something went wrong.");
-	} finally {
-	  setLoading(false);
-	}
+    try {
+      setLoading(true);
+      await axios.patch(`/api/stores/${params.storeId}`, data);
+      router.refresh();
+      toast.success("Store updated.");
+    } catch (error) {
+      toast.error("Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const onDelete = async () => {
-	try {
-	  setLoading(true);
-	  await axios.delete(`/api/stores/${params.storeId}`);
-	  router.refresh();
-	  router.push("/");
-	  toast.success("Store deleted.");
-	} catch (error) {
-	  toast.error("Make sure you removed all products and categories first.");
-	} finally {
-	  setLoading(false);
-	  setOpen(false);
-	}
+    try {
+      setLoading(true);
+      await axios.delete(`/api/stores/${params.storeId}`);
+      router.refresh();
+      router.push("/");
+      toast.success("Store deleted.");
+    } catch (error) {
+      toast.error("Make sure you removed all products and categories first.");
+    } finally {
+      setLoading(false);
+      setOpen(false);
+    }
   };
-  
+
   return (
-	<>
-	  <AlertModal
-		isOpen={open}
-		onClose={() => setOpen(false)}
-		onConfirm={onDelete}
-		loading={loading}
-	  />
-	  <div className="flex items-center justify-between">
-		<Heading title="Settings" description="Manage store preferences" />
-		<Button variant="destructive" size="icon" onClick={() => setOpen(true)}>
-		  <Trash className="h-4 w-4" />
-		</Button>
-	  </div>
-	  <Separator />
-	  <Form {...form}>
-		<form onSubmit={form.handleSubmit(onSubmit)} className="space-x-8">
-		  <div className="grid grid-cols-3 gap-8">
-			<FormField
-			  control={form.control}
-			  name="name"
-			  render={({ field }) => (
-				<FormItem>
-				  <FormLabel>Name</FormLabel>
-				  <FormControl>
-					<Input
-					  {...field}
-					  disabled={loading}
-					  placeholder="Store name"
-					/>
-				  </FormControl>
-				</FormItem>
-			  )}
-			/>
-			<Button disabled={loading} className="ml-auto" type="submit">
-			  Save changes
-			</Button>
-		  </div>
-		</form>
-	  </Form>
-	  <Separator />
-	  <ApiAlert
-		title="NEXT_PUBLIC_API_URL"
-		description={`${origin}/api/${params.storeId}`}
-		variant="admin"
-	  />
-	</>
+    <>
+      <AlertModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        onConfirm={onDelete}
+        loading={loading}
+      />
+      <div className="flex items-center justify-between">
+        <Heading title="Settings" description="Manage store preferences" />
+        <Button variant="destructive" size="icon" onClick={() => setOpen(true)}>
+          <Trash className="h-4 w-4" />
+        </Button>
+      </div>
+      <Separator />
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-x-8">
+          <div className="grid grid-cols-3 gap-8">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      disabled={loading}
+                      placeholder="Store name"
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <Button disabled={loading} className="ml-auto" type="submit">
+              Save changes
+            </Button>
+          </div>
+        </form>
+      </Form>
+      <Heading title="API" description="API Calls for Products" />
+      <Separator />
+      <ApiAlert
+        title="NEXT_PUBLIC_API_URL"
+        description={`${origin}/api/${params.storeId}`}
+        variant="admin"
+      />
+    </>
   );
 };
 
