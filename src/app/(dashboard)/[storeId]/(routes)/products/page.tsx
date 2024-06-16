@@ -1,38 +1,38 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import Heading from "@/components/ui/heading";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import { Plus } from "lucide-react";
-import React from "react";
-import { DataTable } from "@/components/data-table";
-import { Payment, columns } from "./columns";
-import { ApiAlert } from "@/components/ui/api-alert";
-import { useParams } from "next/navigation";
+import { Button } from '@/components/ui/button';
+import Heading from '@/components/ui/heading';
+import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
+import { Plus } from 'lucide-react';
+import React from 'react';
+import { DataTable } from '@/components/data-table';
+import { Payment, columns } from './columns';
+import { ApiAlert } from '@/components/ui/api-alert';
+import { useParams } from 'next/navigation';
 
-export const payments: Payment[] = [
+const payments: Payment[] = [
   {
-    id: "728ed52f",
-    name: "T-Shirt",
-    archived: "pending",
+    id: '728ed52f',
+    name: 'T-Shirt',
+    archived: 'pending',
     featured: true,
     price: 59,
-    category: "suit",
-    size: "M",
-    color: "#000000",
-    date: "2023/06/26",
+    category: 'suit',
+    size: 'M',
+    color: '#000000',
+    date: '2023/06/26',
   },
   {
-    id: "123ed52f",
-    name: "T-Shirt Man",
-    archived: "pending",
+    id: '123ed52f',
+    name: 'T-Shirt Man',
+    archived: 'pending',
     featured: true,
     price: 59,
-    category: "suit",
-    size: "M",
-    color: "#000000",
-    date: "2023/06/26",
+    category: 'suit',
+    size: 'M',
+    color: '#000000',
+    date: '2023/06/26',
   },
 ];
 const ProductsPage = () => {
@@ -58,11 +58,11 @@ const ProductsPage = () => {
         </div>
         <Heading title="API" description="API Calls for Products" />
         <Separator />
-        <ApiAlert
-          title="NEXT_PUBLIC_API_URL"
-          description={`${origin}/api/${params.storeId}`}
-          variant="admin"
-        />
+        {/* <ApiAlert */}
+        {/*   title="NEXT_PUBLIC_API_URL" */}
+        {/*   description={`${origin}/api/${params.storeId}`} */}
+        {/*   variant="admin" */}
+        {/* /> */}
       </div>
     </div>
   );
